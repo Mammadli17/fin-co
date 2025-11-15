@@ -1,23 +1,29 @@
 // A.6. AI Asistanı Sayfası (AI Assistant)
 import React, { useState, useRef, useEffect } from 'react';
-
 // ... (Diğer bileşenler ve App fonksiyonu aynı kalır)
 
 // --- A.6. AI Asistanı Sayfası (AI Assistant) ---
 const AIAssistant = () => {
+    // 💡 DÜZELTME: useRef'e bir generic tip (HTMLDivElement) atayın.
+    // Bu, TypeScript'e 'current' özelliğinin bir Div elementi olacağını söyler.
+    const chatBoxRef = useRef<HTMLDivElement>(null); 
+
     const [messages, setMessages] = useState([
         { role: 'ai', content: "Hello! I'm your AI financial assistant. I can help you with cash flow optimization, expense analysis, financial forecasting, and more. What would you like to know?" }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const chatBoxRef = useRef(null);
-
+    
     // Mesajlar güncellendiğinde en alta kaydırma
     useEffect(() => {
+        // Kontrol eklemeye gerek yok çünkü artık tip doğru ayarlandı,
+        // ancak null kontrolü her zaman iyi bir uygulamadır.
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     }, [messages]);
+
+    // ... (handleSendMessage ve diğer fonksiyonlar aynı kalır)
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
@@ -27,16 +33,13 @@ const AIAssistant = () => {
         setInput('');
         setIsLoading(true);
 
-        // 1. Kullanıcı mesajını ekle
         const newMessages = [...messages, { role: 'user', content: userMessage }];
         setMessages(newMessages);
 
-        // 2. AI yanıtı için bir yer tutucu ekle (Akış buraya yazılacak)
         setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
         
         try {
-            // 3. API Route'a isteği gönder
-            const response = await fetch('/api/chat', { // Adım 1'deki API Route'u
+            const response = await fetch('/api/chat', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage }),
@@ -46,7 +49,6 @@ const AIAssistant = () => {
                 throw new Error("No response body received.");
             }
 
-            // 4. Akış yanıtını oku
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let aiResponseText = '';
@@ -58,11 +60,9 @@ const AIAssistant = () => {
                 const chunk = decoder.decode(value, { stream: true });
                 aiResponseText += chunk;
                 
-                // Anlık olarak state'i güncelle
                 setMessages((prev) => {
                     const lastMessageIndex = prev.length - 1;
                     if (prev[lastMessageIndex].role === 'ai') {
-                        // Son mesajın içeriğini mevcut akış verisiyle güncelle
                         const updatedMessages = [...prev];
                         updatedMessages[lastMessageIndex].content = aiResponseText;
                         return updatedMessages;
@@ -75,7 +75,6 @@ const AIAssistant = () => {
             console.error('Chat Stream Error:', error);
             setMessages((prev) => {
                 const lastMessageIndex = prev.length - 1;
-                // Hata durumunda yer tutucuyu hata mesajıyla değiştir
                 prev[lastMessageIndex].content = 'Error: Failed to connect to AI assistant.';
                 return [...prev];
             });
@@ -94,7 +93,6 @@ const AIAssistant = () => {
         </div>
     );
 
-
     return (
         <>
             <header className="dashboard-header"><h2><i className="fas fa-robot"></i> AI Financial Assistant</h2><p>Get intelligent insights and recommendations</p></header>
@@ -105,6 +103,7 @@ const AIAssistant = () => {
             </section>
             
             <section className="card chat-container">
+                {/* Ref'i buraya atıyoruz */}
                 <div className="chat-box" ref={chatBoxRef}>
                     {messages.map((msg, index) => (
                         <MessageBubble key={index} message={msg} />
@@ -131,4 +130,4 @@ const AIAssistant = () => {
         </>
     );
 };
-export default AIAssistant
+export default AIAssistant;

@@ -1,0 +1,654 @@
+/* Genel Ayarlar ve Font */
+:root {
+    --primary-color: #0F1F41; /* Koyu Lacivert */
+    --accent-blue: #2B76D4; /* Orta Mavi */
+    --accent-green: #2ecc71; /* Canlı Yeşil (Pozitif) */
+    --accent-red: #e74c3c; /* Kırmızı (Negatif) */
+    --bg-light: #F4F7F9; /* Açık Gri Arkaplan */
+    --card-bg: #FFFFFF;
+    --text-dark: #333333;
+    --text-muted: #777777;
+    --color-orange: #ff9f1c;
+    --color-green-tag: #2ecc71;
+    --color-blue-tag: #3498db;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------ */
+/* A. GİRİŞ SAYFASI (LOGIN) STİLLERİ */
+/* ------------------------------------------------------------------ */
+
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-light);
+}
+
+.login-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.login-logo i {
+    color: var(--accent-blue);
+    margin-right: 5px;
+}
+
+.login-card h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+/* Input ve İkon Konteyneri */
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px 12px 12px 40px; 
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input-container .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--text-muted); 
+    font-size: 16px;
+    z-index: 10;
+}
+
+/* Login Butonu ve Loader */
+.login-card .btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-login:disabled {
+    background-color: #777777;
+    cursor: not-allowed;
+}
+
+.login-card .demo-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ */
+/* B. DASHBOARD GENEL YAPISI VE NAVİGASYON */
+/* ------------------------------------------------------------------ */
+
+.dashboard-layout {
+    height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .logo {
+    padding: 0 20px 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #c0cff0;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.sidebar nav ul li a i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.sidebar nav ul li.active a {
+    background-color: var(--accent-blue);
+    color: white;
+    font-weight: 600;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.dashboard-header {
+    background-color: var(--card-bg);
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-header h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ------------------------------------------------------------------ */
+/* C. GENEL SAYFA YAPILARI (GRIDLER, METRİKLER, GRAFİKLER) */
+/* ------------------------------------------------------------------ */
+
+.metrics-grid, .chart-grid, .bottom-grid, .account-grid, .risk-bottom-grid, .analytics-grid {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Overview Grid */
+.chart-grid:not(.analytics-grid) {
+    grid-template-columns: 2fr 1fr;
+}
+.bottom-grid, .account-grid, .risk-bottom-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Analytics Grid */
+.analytics-grid {
+    grid-template-columns: 3fr 2fr;
+}
+.expense-analysis {
+    display: flex;
+    flex-direction: column;
+}
+.expense-analysis h4 { margin-bottom: 20px; }
+.chart-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+.donut-chart {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* Placeholder for the chart colors */
+    background: conic-gradient(
+        #3498db 0 35%, /* Payroll */
+        #2ecc71 35% 50%, /* Rent */
+        #e74c3c 50% 60%, /* Marketing */
+        #f39c12 60% 70%, /* Utilities */
+        #9b59b6 70% 80%, /* Supplies */
+        #bdc3c7 80% 100% /* Other */
+    );
+}
+.legend-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+.legend-item {
+    margin-bottom: 5px;
+}
+.color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+.color-box.payroll { background-color: #3498db; }
+.color-box.rent { background-color: #2ecc71; }
+.color-box.supplies { background-color: #9b59b6; }
+.color-box.utilities { background-color: #f39c12; }
+.color-box.marketing { background-color: #e74c3c; }
+.color-box.other { background-color: #bdc3c7; }
+
+
+/* Metrik Kartları */
+.metric-card { border-left: 5px solid transparent; }
+.metric-card-content { display: flex; justify-content: space-between; align-items: flex-start; }
+.metric-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 5px; }
+.metric-card h3 { font-size: 28px; font-weight: 600; }
+.metric-card span.change { font-size: 13px; font-weight: 500; }
+.metric-card.income { border-left-color: var(--accent-green); }
+.metric-card.expenses { border-left-color: var(--accent-red); }
+.metric-card.cash-flow { border-left-color: var(--accent-blue); }
+.metric-card.pending-invoices { border-left-color: #f39c12; }
+.metric-card.total-outstanding, .metric-card.avg-payment, .metric-card.high-risk { border-left-color: var(--primary-color); }
+
+
+/* Placeholder Grafikler */
+.chart-placeholder {
+    height: 300px;
+    background-color: #f9f9f9;
+    border: 1px dashed #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Genel Uyarı Kartları */
+.alert-card {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+/* Overview Alerts */
+.ai-alerts .alert-card {
+    background-color: #e8f5e9;
+    border-left: 5px solid var(--accent-green);
+}
+
+/* ------------------------------------------------------------------ */
+/* D. SAYFALARA ÖZEL STİLLER */
+/* ------------------------------------------------------------------ */
+
+/* 1. FATURALAR (INVOICES) */
+.invoice-upload-box .upload-area {
+    text-align: center;
+    padding: 40px 20px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    margin-top: 15px;
+    color: var(--text-muted);
+}
+.invoice-upload-box .upload-area i {
+    color: var(--accent-blue);
+    margin-bottom: 10px;
+}
+.btn-file-choose {
+    display: inline-block;
+    background-color: #eee;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+.fraud-detection-box .alert-card {
+    border-left: 5px solid;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+}
+.fraud-detection-box .alert-card i { margin-right: 5px; }
+.fraud-detection-box .clear { border-color: var(--accent-green); background-color: #e8f5e9; color: var(--accent-green); }
+.fraud-detection-box .medium-risk { border-color: var(--color-orange); background-color: #fffde7; color: var(--color-orange); }
+.fraud-detection-box .medium-risk p, .fraud-detection-box .clear p { color: var(--text-muted); margin-top: 5px; }
+.risk-factors { list-style: none; padding-left: 0; font-size: 14px; color: var(--text-muted); margin-top: 5px; }
+.risk-factors li:before { content: "•"; color: var(--accent-blue); display: inline-block; width: 1em; margin-left: -1em; }
+
+.invoice-table, .supplier-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.invoice-table th, .supplier-table th, .invoice-table td, .supplier-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+.invoice-table th, .supplier-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+.status-tag, .risk-tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.status-tag.paid { background-color: #e8f5e9; color: var(--accent-green); }
+.status-tag.pending { background-color: #fffde7; color: var(--color-orange); }
+.risk-tag.low { background-color: #e8f5e9; color: var(--accent-green); }
+.risk-tag.medium { background-color: #fffde7; color: var(--color-orange); }
+.risk-tag.high { background-color: #fdeaea; color: var(--accent-red); }
+.action-button {
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* 2. MUHASEBECİ EŞLEŞTİRME (ACCOUNTANT MATCH) */
+.accountant-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.accountant-header {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+.accountant-header .initials {
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.accountant-header .initials.mc { background-color: var(--accent-green); }
+.accountant-header .initials.er { background-color: var(--color-orange); }
+.accountant-header .details h4 { font-size: 18px; margin-bottom: 5px; }
+.accountant-header .details p { font-size: 14px; color: var(--text-muted); margin-bottom: 5px; }
+.accountant-header .price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-left: auto;
+    text-align: right;
+}
+.accountant-header .price span { display: block; font-size: 12px; font-weight: normal; color: var(--text-muted); }
+
+.tags { display: flex; gap: 8px; margin-bottom: 8px; }
+.tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.tag.green { background-color: #e8f5e9; color: var(--accent-green); }
+.tag.blue { background-color: #e3f2fd; color: var(--accent-blue); }
+.tag.orange { background-color: #fff3e0; color: var(--color-orange); }
+
+.accountant-actions {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+.btn-request {
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+.btn-view {
+    background-color: #eee;
+    color: var(--text-dark);
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* 3. BANKACILIK & RİSK (BANKING & RISK) */
+.account-card { display: flex; flex-direction: column; justify-content: space-between; height: 150px; }
+.account-card .balance { font-size: 32px; font-weight: 700; color: var(--primary-color); margin-top: 10px; }
+.account-card .status { font-size: 14px; color: var(--text-muted); }
+
+.sme-risk-score { text-align: center; padding: 30px 20px; margin-bottom: 30px; }
+.sme-risk-score .score { font-size: 48px; font-weight: 700; color: var(--accent-green); }
+.sme-risk-score .out-of { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+.sme-risk-score .excellent-tag { background-color: #e8f5e9; color: var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 5px;}
+
+.score-details-grid { display: flex; justify-content: space-around; padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px; }
+.score-detail-item { text-align: center; }
+.score-detail-item .value { font-size: 24px; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+.score-detail-item .label { font-size: 13px; color: var(--text-muted); }
+
+.payment-alerts .alert-item {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+.payment-alerts .alert-item.overdue { border: 1px solid var(--accent-red); background-color: #fdeaea; }
+.payment-alerts .alert-item.due-soon { border: 1px solid #ddd; background-color: #f9f9f9; }
+.payment-alerts .alert-item.due-soon span { color: var(--text-dark); }
+.action-btn.small-btn { padding: 5px 10px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; }
+.action-btn.red { background: none; border: 1px solid var(--accent-red); color: var(--accent-red); }
+.action-btn.view { background-color: var(--primary-color); border: none; color: white; }
+
+.bank-offers .offer-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.bank-offers .offer-item h4 { margin-bottom: 5px; }
+.bank-offers .offer-item p { font-size: 14px; color: var(--text-muted); }
+.bank-offers .pre-approved {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    background-color: var(--accent-green);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.btn-learn { background-color: var(--accent-blue); color: white; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; font-size: 13px; }
+
+/* 4. AYARLAR (SETTINGS) */
+.settings-section {
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.settings-section h4 { margin-bottom: 5px; }
+.settings-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 15px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
+.form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; }
+
+.btn-save-changes {
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.connected-account-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+.connected-account-card:last-of-type { border-bottom: none; }
+.status-connected { font-size: 13px; color: var(--accent-green); margin-top: 3px; }
+.btn-manage { background-color: #eee; border: 1px solid #ddd; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+.btn-add-account {
+    background-color: var(--accent-green);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+.btn-add-account i { margin-right: 8px; }
+/* style.css (Örnek Stil Kodları) */
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 450px; /* Sohbet kutusunun yüksekliği */
+    padding: 0;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-message, .ai-message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 12px;
+    max-width: 85%;
+    line-height: 1.5;
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 2px;
+}
+
+.ai-message {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 2px;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 15px 20px;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.chat-input-area button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.loading {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: white;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: var(--background-light);
+    border-color: var(--primary-color);
+}

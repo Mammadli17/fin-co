@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinLink Pro Tek Sayfa Tasarım Kopyası</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Genel Ayarlar ve Font */
+        :root {
+            --primary-color: #0F1F41; /* Koyu Lacivert */
+            --accent-blue: #2B76D4; /* Orta Mavi */
+            --accent-green: #2ecc71; /* Canlı Yeşil (Pozitif) */
+            --accent-red: #e74c3c; /* Kırmızı (Negatif) */
+            --bg-light: #F4F7F9; /* Açık Gri Arkaplan */
+            --card-bg: #FFFFFF;
+            --text-dark: #333333;
+            --text-muted: #777777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* A. GİRİŞ SAYFASI (LOGIN.HTML) STİLİ */
+        /* ------------------------------------------------------------------ */
+
+        #login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-light);
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .login-logo i {
+            color: var(--accent-blue);
+            margin-right: 5px;
+        }
+
+        .login-card h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .login-card .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .login-card .btn-login:hover {
+            background-color: #1a3360;
+        }
+
+        .login-card a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .login-card .demo-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* B. DASHBOARD GENEL YAPISI VE STİLLERİ */
+        /* ------------------------------------------------------------------ */
+
+        #dashboard-container {
+            display: none; /* Başlangıçta gizli */
+            height: 100vh;
+            display: flex;
+        }
+
+        /* 1. Kenar Çubuğu (Sidebar) */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar .logo {
+            padding: 0 20px 20px;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #c0cff0;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .sidebar nav ul li a i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .sidebar nav ul li.active a {
+            background-color: var(--accent-blue);
+            color: white;
+            font-weight: 600;
+        }
+
+        .sidebar nav ul li a:hover:not(.active) {
+            background-color: #1a3360;
+            color: white;
+        }
+
+        /* 2. Ana İçerik Alanı ve Başlık */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            background-color: var(--card-bg);
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .dashboard-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* 3. Genel Kart Stili */
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* C. SAYFAYA ÖZEL STİLLER (OVERVIEW, ANALYTICS, BANKING, AI) */
+        /* ------------------------------------------------------------------ */
+
+        /* OVERVIEW & ANALYTICS */
+        .metrics-grid, .chart-grid, .bottom-grid, .account-grid, .risk-bottom-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metrics-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        
+        .chart-grid:not(.analytics-grid) {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        .bottom-grid, .account-grid, .risk-bottom-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Metric Kartları */
+        .metric-card { border-left: 5px solid transparent; }
+        .metric-card-content { display: flex; justify-content: space-between; align-items: flex-start; }
+        .metric-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 5px; }
+        .metric-card h3 { font-size: 28px; font-weight: 600; }
+        .metric-card span.change { font-size: 13px; font-weight: 500; }
+
+        /* Metric Renkleri */
+        .metric-card.income { border-left-color: var(--accent-green); }
+        .metric-card.income h3 { color: var(--accent-green); }
+        .metric-card.income span.change { color: var(--accent-green); }
+
+        .metric-card.expenses { border-left-color: var(--accent-red); }
+        .metric-card.expenses h3 { color: var(--accent-red); }
+
+        .metric-card.cash-flow { border-left-color: var(--accent-blue); }
+        .metric-card.cash-flow h3 { color: var(--accent-green); }
+        .metric-card.cash-flow span { color: var(--accent-green); }
+        
+        .metric-card.pending-invoices { border-left-color: #f39c12; }
+
+        /* Placeholder Grafikler */
+        .chart-placeholder {
+            height: 300px;
+            background-color: #f9f9f9;
+            border: 1px dashed #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* AI Uyarıları */
+        .alert-card {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e8f5e9;
+            border-left: 5px solid var(--accent-green);
+            margin-top: 15px;
+        }
+        
+        /* AI Assistant */
+        .quick-actions { display: flex; gap: 15px; margin-top: 20px; margin-bottom: 30px; }
+        .action-btn { display: flex; align-items: center; padding: 12px 20px; border: 1px solid #e0e0e0; border-radius: 50px; background: var(--card-bg); cursor: pointer; font-size: 14px; transition: background-color 0.2s; }
+        .chat-container { height: 500px; display: flex; flex-direction: column; }
+        .chat-box { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        .ai-message { background-color: #f3e5f5; padding: 15px; border-radius: 10px; border-top-left-radius: 0; margin-bottom: 15px; line-height: 1.5; max-width: 80%; color: #6A1B9A; font-size: 15px; }
+        .chat-input-area { border-top: 1px solid #eee; padding: 15px 20px; display: flex; }
+        .chat-input-area input { flex-grow: 1; padding: 10px; border: none; outline: none; font-size: 16px; }
+        .chat-input-area button { background: none; border: none; color: var(--accent-blue); font-size: 24px; cursor: pointer; }
+
+        /* Banking & Risk */
+        .account-card { display: flex; flex-direction: column; justify-content: space-between; height: 150px; }
+        .account-card .balance { font-size: 32px; font-weight: 700; color: var(--primary-color); }
+        .credit-score-card { text-align: center; padding: 30px 20px; }
+        .credit-score-card .score { font-size: 60px; font-weight: 700; color: var(--primary-color); }
+        .credit-score-card .excellent-tag { display: inline-block; background-color: #e8f5e9; color: var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+        .score-details-grid { display: flex; justify-content: space-around; padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px; }
+        .alert-list .alert-item { padding: 15px; border-radius: 8px; border-left: 5px solid var(--accent-red); margin-bottom: 15px; background-color: #fdeaea; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .alert-list .alert-item button { border: 1px solid var(--accent-red); color: var(--accent-red); padding: 5px 10px; border-radius: 6px; background: none; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="login-page">
+        <div class="login-card">
+            <div class="login-logo"><i class="fas fa-link"></i> FinLink Pro</div>
+            <h3>Welcome Back</h3>
+            <p>Enter your credentials to access your dashboard</p>
+            
+            <form>
+                <input type="email" placeholder="you@example.com" value="sme@example.com">
+                <input type="password" placeholder="********" value="******">
+                
+                <button type="button" class="btn-login" onclick="showDashboard()">Login</button>
+            </form>
+
+            <p class="mt-3">Don't have an account? <a href="#">Sign up</a></p>
+            
+            <p class="demo-text">Demo: Tıkladığınızda dashboard açılacaktır.</p>
+        </div>
+    </div>
+
+    <div id="dashboard-container" style="display: none;">
+        
+        <aside class="sidebar">
+            <div class="logo"><i class="fas fa-link"></i> FinLink Pro</div>
+            <div style="padding: 0 20px 10px; font-size: 13px; color: #a0a0a0;">SME Dashboard</div>
+            <nav>
+                <ul>
+                    <li id="nav-overview" class="active"><a onclick="showPage('overview', 'nav-overview')"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+                    <li id="nav-analytics"><a onclick="showPage('analytics', 'nav-analytics')"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li id="nav-invoices"><a onclick="showPage('invoices', 'nav-invoices')"><i class="fas fa-file-invoice"></i> Invoices</a></li>
+                    <li id="nav-ai-assistant"><a onclick="showPage('ai-assistant', 'nav-ai-assistant')"><i class="fas fa-robot"></i> AI Assistant</a></li>
+                    <li id="nav-accountant-match"><a onclick="showPage('accountant-match', 'nav-accountant-match')"><i class="fas fa-user-tie"></i> Accountant Match</a></li>
+                    <li id="nav-banking-risk"><a onclick="showPage('banking-risk', 'nav-banking-risk')"><i class="fas fa-university"></i> Banking & Risk</a></li>
+                    <li id="nav-supply-chain"><a onclick="showPage('supply-chain', 'nav-supply-chain')"><i class="fas fa-truck-loading"></i> Supply Chain</a></li>
+                    <li id="nav-settings"><a onclick="showPage('settings', 'nav-settings')"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="overview" class="page-content" style="display: block;">
+                 <header class="dashboard-header">
+                    <h2>Overview</h2>
+                    <p>Your financial dashboard at a glance</p>
+                </header>
+                <section class="metrics-grid">
+                    <div class="card metric-card income"><div class="metric-card-content"><div><p>Monthly Income</p><h3>$67,000</h3><span class="change">+12% from last month</span></div><i class="fas fa-dollar-sign fa-2x" style="color: var(--accent-green);"></i></div></div>
+                    <div class="card metric-card expenses"><div class="metric-card-content"><div><p>Monthly Expenses</p><h3>$45,000</h3><span class="change" style="color: var(--text-muted);">Operating costs</span></div><i class="fas fa-minus-circle fa-2x" style="color: var(--accent-red);"></i></div></div>
+                    <div class="card metric-card cash-flow"><div class="metric-card-content"><div><p>Net Cash Flow</p><h3 style="color: var(--accent-green);">$22,000</h3><span class="change" style="color: var(--accent-green);">Healthy margin</span></div><i class="fas fa-piggy-bank fa-2x" style="color: var(--accent-blue);"></i></div></div>
+                    <div class="card metric-card pending-invoices"><div class="metric-card-content"><div><p>Pending Invoices</p><h3>$8,300</h3><span class="change" style="color: var(--text-muted);">1 invoice outstanding</span></div><i class="fas fa-hourglass-half fa-2x" style="color: #f39c12;"></i></div></div>
+                </section>
+                <section class="chart-grid">
+                    <div class="card cash-flow-chart"><h4>Cash Flow Trend</h4><div class="chart-placeholder"><p>Nakit Akışı Grafiği (Placeholder)</p></div></div>
+                    <div class="card monthly-comparison"><h4>Monthly Comparison</h4><div class="chart-placeholder"><p>Aylık Karşılaştırma Çubuk Grafiği (Placeholder)</p></div></div>
+                </section>
+                <section class="bottom-grid">
+                    <div class="card ai-alerts">
+                        <h4><i class="fas fa-robot"></i> AI Financial Alerts</h4>
+                        <div class="alert-card"><p style="color: var(--accent-green);">Cash flow is healthy</p><p style="font-size: 13px; color: #4CAF50;">Your income-to-expense ratio is optimal at 1.49</p></div>
+                    </div>
+                    <div class="card recent-invoices">
+                        <h4>Recent Invoices</h4>
+                        <div class="invoice-item"><div class="details"><span class="invoice-id">INV-001</span><span>Acme Corp</span></div><span class="amount">$12,500</span></div>
+                        <div class="invoice-item"><div class="details"><span class="invoice-id">INV-002</span><span>Global Ltd</span></div><span class="amount">$4,800</span></div>
+                        <div class="invoice-item" style="border-bottom: none;"><div class="details"><span class="invoice-id">INV-003</span><span>TechStart Inc</span></div><span class="amount">$8,300</span></div>
+                    </div>
+                </section>
+            </section>
+
+            <section id="analytics" class="page-content" style="display: none;">
+                <header class="dashboard-header">
+                    <h2>Financial Analytics</h2>
+                    <p>Deep dive into your financial data</p>
+                </header>
+                <section class="chart-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="card">
+                        <h4>Expenses by Category</h4>
+                        <div class="chart-placeholder" style="height: 300px; padding: 20px;">
+                             <img src="https://via.placeholder.com/300x300/F0F8FF/333333?text=Donut+Chart+Placeholder" alt="Donut Chart Placeholder" style="max-width: 80%; border-radius: 50%;">
+                        </div>
+                        <div style="margin-top: 10px; font-size: 14px; text-align: center;">
+                            <span style="color: #4CAF50;">Rent: $8,000</span> | <span style="color: #2B76D4;">Payroll: $18,000</span> | <span style="color: #9C27B0;">Supplies: $5,500</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>7-Month Trend</h4>
+                        <div class="chart-placeholder" style="height: 300px;"><p>Çubuk Grafik (7 Aylık Trend Placeholder)</p></div>
+                    </div>
+                </section>
+                <section class="bottom-grid" style="grid-template-columns: 1fr;">
+                    <div class="card ai-recommendations">
+                        <h4><i class="fas fa-robot"></i> AI Recommendations</h4>
+                        <div class="alert-card" style="border-left-color: var(--accent-blue); background-color: #e3f2fd; margin-bottom: 15px;"><p style="color: var(--primary-color); font-weight: 600;">Cost Optimization Opportunity</p><p style="font-size: 13px; color: #2B76D4;">Your marketing expenses increased 25% this quarter. AI suggests reviewing ROI on recent campaigns and consolidating tools to save approximately $1,200/month.</p></div>
+                        <div class="alert-card" style="border-left-color: var(--accent-green); background-color: #e8f5e9;"><p style="color: var(--accent-green); font-weight: 600;">Revenue Growth Pattern</p><p style="font-size: 13px; color: #4CAF50;">Analysis shows consistent 8-12% monthly growth. Maintain current sales strategy and consider scaling operations to capture emerging opportunities.</p></div>
+                    </div>
+                </section>
+            </section>
+            
+            <section id="ai-assistant" class="page-content" style="display: none;">
+                <header class="dashboard-header">
+                    <h2><i class="fas fa-robot"></i> AI Financial Assistant</h2>
+                    <p>Get intelligent insights and recommendations</p>
+                </header>
+                <section class="quick-actions">
+                    <div class="action-btn"><i class="fas fa-chart-pie"></i> Optimize cash flow</div>
+                    <div class="action-btn"><i class="fas fa-money-bill-wave"></i> Reduce expenses</div>
+                    <div class="action-btn"><i class="fas fa-heartbeat"></i> Financial health check</div>
+                </section>
+                <section class="card chat-container">
+                    <div class="chat-box">
+                        <h4 style="margin-bottom: 10px;">Chat with AI</h4>
+                        <div class="ai-message"><strong>AI Assistant</strong><br>Hello! I'm your AI financial assistant. I can help you with cash flow optimization, expense analysis, financial forecasting, and more. What would you like to know?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" placeholder="Ask about your finances...">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </section>
+            </section>
+
+            <section id="banking-risk" class="page-content" style="display: none;">
+                <header class="dashboard-header">
+                    <h2>Banking & Risk Management</h2>
+                    <p>Monitor accounts, credit score, and payment status</p>
+                </header>
+                <section class="account-grid">
+                    <div class="card account-card"><span class="account-name">Business Checking <i class="fas fa-lock float-right" style="color: var(--text-muted); font-size: 14px;"></i></span><span class="balance">$45,230</span><span class="status">Chase - Active</span></div>
+                    <div class="card account-card"><span class="account-name">Savings Account <i class="fas fa-lock float-right" style="color: var(--text-muted); font-size: 14px;"></i></span><span class="balance">$28,500</span><span class="status">Bank of America - Active</span></div>
+                </section>
+                <section class="credit-score-card card">
+                    <h4>SME Credit Risk Score</h4>
+                    <div class="score">742</div>
+                    <div class="out-of">Out of 850 <span class="excellent-tag">Excellent</span></div>
+                    <p style="color: var(--text-muted); font-size: 13px;">Top 15% of SMEs</p>
+                    <div class="score-details-grid">
+                        <div class="score-detail-item"><div class="value">98%</div><div class="label">Payment History</div></div>
+                        <div class="score-detail-item"><div class="value">32%</div><div class="label">Credit Utilization</div></div>
+                        <div class="score-detail-item"><div class="value">4.2 yrs</div><div class="label">Account Age</div></div>
+                    </div>
+                </section>
+                <section class="risk-bottom-grid">
+                    <div class="card payment-alerts">
+                        <h4>Payment Alerts</h4>
+                        <div class="alert-list">
+                            <div class="alert-item"><div class="details"><strong>TechStart Inc</strong><br><span style="color: var(--accent-red);">$8,300 - 3 days overdue</span></div><button class="action-btn">Remind</button></div>
+                            <div class="alert-item" style="border-left-color: #f39c12; background-color: #fff9e6;"><div class="details"><strong>Global Ltd</strong><br><span style="color: #f39c12;">$12,000 - Due in 2 days</span></div><button class="action-btn" style="border-color: #f39c12; color: #f39c12;">View</button></div>
+                        </div>
+                    </div>
+                    <div class="card bank-offers">
+                        <h4>Bank Offers</h4>
+                        <div class="offer-list">
+                            <div class="offer-item"><span class="pre-approved">Pre-approved</span><h4>Business Line of Credit</h4><p>Wells Fargo</p><p>Up to $50,000</p><span class="rate">6.5% APR</span> | Flexible<a href="#" style="float: right; color: var(--accent-blue); font-size: 14px;">Learn More</a></div>
+                            <div class="offer-item"><span class="pre-approved">Pre-approve</span><h4>Equipment Financing</h4><p>Chase</p><p>Up to $25,000</p><span class="rate">6.9% APR</span> | Fixed</div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            <section id="invoices" class="page-content" style="display: none;">
+                <header class="dashboard-header"><h2>Invoices</h2><p>Fatura Yönetim Sayfası İçeriği</p></header>
+                <div class="card" style="padding: 50px; text-align: center; color: var(--text-muted);">Bu alan Fatura tablosu ve detayları için ayrılmıştır.</div>
+            </section>
+            <section id="accountant-match" class="page-content" style="display: none;">
+                <header class="dashboard-header"><h2>Accountant Match</h2><p>Muhasebeci Eşleştirme Sayfası İçeriği</p></header>
+                <div class="card" style="padding: 50px; text-align: center; color: var(--text-muted);">Bu alan Muhasebeci Arama ve Eşleştirme modülü için ayrılmıştır.</div>
+            </section>
+            <section id="supply-chain" class="page-content" style="display: none;">
+                <header class="dashboard-header"><h2>Supply Chain</h2><p>Tedarik Zinciri Yönetim Sayfası İçeriği</p></header>
+                <div class="card" style="padding: 50px; text-align: center; color: var(--text-muted);">Bu alan Tedarik Zinciri ve Lojistik verileri için ayrılmıştır.</div>
+            </section>
+            <section id="settings" class="page-content" style="display: none;">
+                <header class="dashboard-header"><h2>Settings</h2><p>Ayarlar Sayfası İçeriği</p></header>
+                <div class="card" style="padding: 50px; text-align: center; color: var(--text-muted);">Bu alan Hesap Ayarları ve Tercihler için ayrılmıştır.</div>
+            </section>
+
+        </main>
+    </div>
+    
+    <script>
+        // Tüm sayfa içeriği bölümlerini saklayan dizi
+        const allPages = ['overview', 'analytics', 'ai-assistant', 'banking-risk', 'invoices', 'accountant-match', 'supply-chain', 'settings'];
+        const allNavs = ['nav-overview', 'nav-analytics', 'nav-invoices', 'nav-ai-assistant', 'nav-accountant-match', 'nav-banking-risk', 'nav-supply-chain', 'nav-settings'];
+
+        // Sayfalar arasında geçiş yapan ana fonksiyon
+        function showPage(pageId, navId) {
+            // Tüm içerik bölümlerini gizle
+            allPages.forEach(id => {
+                const page = document.getElementById(id);
+                if (page) page.style.display = 'none';
+            });
+
+            // Tüm navigasyonları pasif yap
+            allNavs.forEach(id => {
+                const nav = document.getElementById(id);
+                if (nav) nav.classList.remove('active');
+            });
+            
+            // İstenen içeriği göster
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.style.display = 'block';
+
+            // İstenen navigasyonu aktif yap
+            const targetNav = document.getElementById(navId);
+            if (targetNav) targetNav.classList.add('active');
+        }
+
+        // Giriş ekranından dashboard'a geçiş fonksiyonu
+        function showDashboard() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('dashboard-container').style.display = 'flex';
+            // Girişten sonra otomatik olarak Overview sayfasını aç
+            showPage('overview', 'nav-overview');
+        }
+
+        // Başlangıçta sadece login sayfasını göster (CSS ile zaten ayarlı, bu sadece emin olmak için)
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     document.getElementById('dashboard-container').style.display = 'none';
+        //     document.getElementById('login-page').style.display = 'flex';
+        // });
+    </script>
+</body>
+</html>

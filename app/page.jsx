@@ -4,17 +4,15 @@ import React, { useState } from 'react';
 import './style.css'; 
 import AIAssistant from './ai-assistant';
 
+// Not: İkonlar için `<i className="fas fa-..."></i>` yapısı kullanılmıştır.
+// Bu ikonların görünmesi için projenize Font Awesome kütüphanesini eklemeniz gerekir.
+
 // =========================================================
 // A. Tüm Sayfa Bileşenleri (Components)
 // =========================================================
 
-// Yeni Arayüz Tanımlaması: Login bileşeninin beklediği props'ları belirtir
-interface LoginProps {
-    onLogin: () => void; 
-}
-
 // --- A.1. Giriş Sayfası Bileşeni ---
-const Login = ({ onLogin }: LoginProps) => { // 🛠️ DÜZELTME BURADA
+const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -70,14 +68,8 @@ const Login = ({ onLogin }: LoginProps) => { // 🛠️ DÜZELTME BURADA
     );
 };
 
-// Yeni Arayüz Tanımlaması: Sidebar bileşeninin beklediği props'ları belirtir
-interface SidebarProps {
-    activePage: string;
-    onPageChange: (pageId: string) => void; 
-}
-
 // --- A.2. Kenar Çubuğu Bileşeni ---
-const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
+const Sidebar = ({ activePage, onPageChange }) => {
     const navItems = [
         { id: 'overview', icon: 'fas fa-tachometer-alt', label: 'Overview' },
         { id: 'invoices', icon: 'fas fa-file-invoice', label: 'Invoices' },
@@ -134,7 +126,8 @@ const Overview = () => (
     </>
 );
 
-// --- A.4. Analizler Sayfası (Analytics) --- (Buraya bir bileşen eklemediniz, gerekirse eklenebilir)
+// --- A.4. Analizler Sayfası (Analytics) ---
+
 
 // --- A.5. Fatura Yönetimi Sayfası (Invoices) ---
 const Invoices = () => (
@@ -191,7 +184,29 @@ const Invoices = () => (
     </>
 );
 
-// --- A.6. AI Asistanı Sayfası (AI Assistant) --- (AIAssistant bileşeni './ai-assistant'ten import edildi)
+// --- A.6. AI Asistanı Sayfası (AI Assistant) ---
+// const AIAssistant = () => (
+//     <>
+//         <header className="dashboard-header"><h2><i className="fas fa-robot"></i> AI Financial Assistant</h2><p>Get intelligent insights and recommendations</p></header>
+//         <section className="quick-actions">
+//             <div className="action-btn"><i className="fas fa-chart-pie"></i> Optimize cash flow</div>
+//             <div className="action-btn"><i className="fas fa-money-bill-wave"></i> Reduce expenses</div>
+//             <div className="action-btn"><i className="fas fa-heartbeat"></i> Financial health check</div>
+//         </section>
+//         <section className="card chat-container">
+//             <div className="chat-box">
+//                 <h4 style={{ marginBottom: '10px' }}>Chat with AI</h4>
+//                 <div className="ai-message">
+//                     <p>Hello! I'm your AI financial assistant. I can help you with cash flow optimization, expense analysis, financial forecasting, and more. What would you like to know?</p>
+//                 </div>
+//             </div>
+//             <div className="chat-input-area">
+//                 <input type="text" placeholder="Ask about your finances..."/>
+//                 <button><i className="fas fa-paper-plane"></i></button>
+//             </div>
+//         </section>
+//     </>
+// );
 
 // --- A.7. Muhasebeci Eşleştirme Sayfası (Accountant Match) ---
 const AccountantMatch = () => (
@@ -441,7 +456,7 @@ function App() {
     setActivePage('overview');
   };
 
-  const handlePageChange = (pageId: string) => { // Bu fonksiyonu da tiplendirelim
+  const handlePageChange = (pageId) => {
     setActivePage(pageId);
   };
 

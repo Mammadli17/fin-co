@@ -1,7 +1,7 @@
 // app/ai-assistant.tsx
 import React, { useState, useRef, useEffect } from 'react';
 
-// Mesaj tiplerini tanımlayalım
+// Mesaj tiplerini tanımlıyoruz
 interface Message {
     role: 'user' | 'ai';
     content: string;
@@ -12,6 +12,7 @@ const AIAssistant = () => {
     const chatBoxRef = useRef<HTMLDivElement>(null); 
 
     const [messages, setMessages] = useState<Message[]>([
+        // İlk mesajın da Message[] tipine uyduğunu belirtelim
         { role: 'ai', content: "Hello! I'm your AI financial assistant. I can help you with cash flow optimization, expense analysis, financial forecasting, and more. What would you like to know?" }
     ]);
     const [input, setInput] = useState('');
@@ -24,7 +25,7 @@ const AIAssistant = () => {
         }
     }, [messages]);
 
-    // Olay parametresine (e) React.FormEvent tipini ekliyoruz
+    // Olay parametresini tiplendiriyoruz
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
@@ -33,11 +34,17 @@ const AIAssistant = () => {
         setInput('');
         setIsLoading(true);
 
-        const newMessages = [...messages, { role: 'user', content: userMessage }];
-        setMessages(newMessages);
+        // 🛠️ DÜZELTME: Yeni mesajı Message tipinde tanımla
+        const newMessage: Message = { role: 'user', content: userMessage }; 
 
-        setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
+        // 1. Kullanıcı mesajını ekle
+        const newMessages = [...messages, newMessage];
+        setMessages(newMessages); // Hata çözüldü
         
+        // 2. AI yanıtı için bir yer tutucu ekle (Tipi uygun)
+        setMessages((prev) => [...prev, { role: 'ai', content: '' } as Message]); 
+        // Aslında yukarıdaki kullanım için de açıkça 'as Message' eklemek en güvenlisidir.
+
         try {
             const response = await fetch('/api/chat', { 
                 method: 'POST',

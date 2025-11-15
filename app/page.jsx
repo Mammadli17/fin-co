@@ -29,7 +29,7 @@ const Login = ({ onLogin }) => {
             if (email === VALID_EMAIL && password === VALID_PASSWORD) {
                 onLogin();
             } else {
-                setError('Hatalı e-posta veya şifre. Lütfen demo bilgilerini kullanın.');
+                setError('Error: Wrong passwor or email');
             }
         }, 2000); 
     };
@@ -42,7 +42,7 @@ const Login = ({ onLogin }) => {
                 <p>Enter your credentials to access your dashboard</p>
                 
                 <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
-                    <div className="input-container">
+                    <div className="input-container" style={{marginTop:30}}>
                         <i className="fas fa-envelope input-icon"></i>
                         <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                     </div>
@@ -59,9 +59,7 @@ const Login = ({ onLogin }) => {
                     </button>
                 </form>
 
-                <p className="mt-3">Don't have an account? <a href="#">Sign up</a></p>
                 <p className="demo-text" style={{ marginTop: '5px' }}>
-                    **Demo Kimlik Bilgileri:** Email: `isamammadli17@gmail.com` | Şifre: `Salam123!`
                 </p>
             </div>
         </div>

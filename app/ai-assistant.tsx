@@ -1,14 +1,17 @@
-// A.6. AI Asistanı Sayfası (AI Assistant)
+// app/ai-assistant.tsx
 import React, { useState, useRef, useEffect } from 'react';
-// ... (Diğer bileşenler ve App fonksiyonu aynı kalır)
 
-// --- A.6. AI Asistanı Sayfası (AI Assistant) ---
+// Mesaj tiplerini tanımlayalım
+interface Message {
+    role: 'user' | 'ai';
+    content: string;
+}
+
 const AIAssistant = () => {
-    // 💡 DÜZELTME: useRef'e bir generic tip (HTMLDivElement) atayın.
-    // Bu, TypeScript'e 'current' özelliğinin bir Div elementi olacağını söyler.
+    // useRef tipini HTMLDivElement olarak belirtiyoruz
     const chatBoxRef = useRef<HTMLDivElement>(null); 
 
-    const [messages, setMessages] = useState([
+    const [messages, setMessages] = useState<Message[]>([
         { role: 'ai', content: "Hello! I'm your AI financial assistant. I can help you with cash flow optimization, expense analysis, financial forecasting, and more. What would you like to know?" }
     ]);
     const [input, setInput] = useState('');
@@ -16,16 +19,13 @@ const AIAssistant = () => {
     
     // Mesajlar güncellendiğinde en alta kaydırma
     useEffect(() => {
-        // Kontrol eklemeye gerek yok çünkü artık tip doğru ayarlandı,
-        // ancak null kontrolü her zaman iyi bir uygulamadır.
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     }, [messages]);
 
-    // ... (handleSendMessage ve diğer fonksiyonlar aynı kalır)
-
-    const handleSendMessage = async (e) => {
+    // Olay parametresine (e) React.FormEvent tipini ekliyoruz
+    const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
 
@@ -83,7 +83,7 @@ const AIAssistant = () => {
         }
     };
 
-    const MessageBubble = ({ message }) => (
+    const MessageBubble = ({ message }: { message: Message }) => (
         <div className={message.role === 'user' ? 'user-message' : 'ai-message'}>
             {message.role === 'user' ? (
                 <p><strong>You:</strong> {message.content}</p>
@@ -103,7 +103,6 @@ const AIAssistant = () => {
             </section>
             
             <section className="card chat-container">
-                {/* Ref'i buraya atıyoruz */}
                 <div className="chat-box" ref={chatBoxRef}>
                     {messages.map((msg, index) => (
                         <MessageBubble key={index} message={msg} />
